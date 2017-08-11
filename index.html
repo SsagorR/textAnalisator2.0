@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>textAnalisator2.0</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="utf-8">
+</head>
+<body>
+<input type="file" id="file" class="hidden">
+<label for="file" class="input">select file</label><br>
+<span class="results">Total amount of words:  </span><span class="results" id="amount"></span><br>
+<span class="results">The most popular word:  </span><span class="results" id="popular"></span><br>
+<span class="results">Total amount of the most popular word:  </span><span class="results" id="amountPopular"></span>
+
+<script type="text/javascript">
+
+var inputValue = '' ;
+
+document.getElementById('file').addEventListener('change', readFile, false);
+function readFile (evt) {
+    var files = evt.target.files;
+    var file = files[0];           
+    var reader = new FileReader();
+    reader.onload = function(event) {
+    inputValue += event.target.result;           
+  	split = inputValue.split('\n');
+   	split = split.map(function(number) {
+   		return number.split('');
+   	}).map(function(number) {
+   		return number.map(digit=>{
+		return parseInt(digit);
+    		});
+    	});
+
+   var textArray = inputValue.split(' ');
+   function mostPopularWord(array) {
+   	var mPWord = {
+   		word: '',
+   		amount: 1
+   	}
+   	var mPWordAmount = 1;
+
+	   for (var i = 0; i < array.length; i++) {
+		   var word = array[i];
+		   var wordAmount = 1;
+		   
+
+		   for (var j = i + 1; j < array.length; j++) {
+		   	if (word == array[j]) {
+		   		wordAmount++;
+		   	} else if (wordAmount > mPWord.amount) {
+		   		mPWord.word = word;
+		   		mPWord.amount = wordAmount;
+		   	}
+		   }
+	   }
+	   
+		return mPWord;
+   }
+
+   document.getElementById('popular').innerHTML = mostPopularWord(textArray).word;
+   document.getElementById('amountPopular').innerHTML = mostPopularWord(textArray).amount;
+   document.getElementById('amount').innerHTML = textArray.length;
+
+
+   	}
+       reader.readAsText(file);
+      
+       return inputValue;
+    }
+
+</script>
+</body>
+</html>
