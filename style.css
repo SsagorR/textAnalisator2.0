@@ -3,7 +3,10 @@
 }
 
 body {
-
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .hidden {
@@ -11,7 +14,33 @@ body {
 }
 
 .input {
-	width: 200px;
-	height: 40px;
-	background-color: lightblue;
+	width: 10em;
+	height: 2.5em;
+	background-color: #add8e6;
+	border: 3px solid #76bdd5;
+	border-radius: 10px;
+	text-align: center;
+	line-height: 2em;
+	font-family: Verdana, sans-serif;
+}
+
+.input:hover {
+	background-color: #76bdd5;
+}
+
+.inline {
+	display: inline;
+}
+
+.results {
+	font-family: "Lucida Sans Unicode", sans-serif;
+}
+
+table, td, tr {
+	border: 1px solid black;
+}
+
+td {
+	width: 60px;
+	height: 20px;
 }

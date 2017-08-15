@@ -8,9 +8,21 @@
 <body>
 <input type="file" id="file" class="hidden">
 <label for="file" class="input">select file</label><br>
-<span class="results">Total amount of words:  </span><span class="results" id="amount"></span><br>
-<span class="results">The most popular word:  </span><span class="results" id="popular"></span><br>
-<span class="results">Total amount of the most popular word:  </span><span class="results" id="amountPopular"></span>
+<div class="inline"><span class="results">Total amount of words:  </span><span class="results" id="amount"></span><br></div>
+<div class="inline"><span class="results">The most popular word:  </span><span class="results" id="popular"></span><br></div>
+<div class="inline"><span class="results">Total amount of the most popular word:  </span><span class="results" id="amountPopular"></span></div>
+<table>
+	<tr><td></td><td class="popular1"></td><td class="amountPopular1"></td></tr>
+	<tr><td></td><td class="popular2"></td><td class="amountPopular2"></td></tr>
+	<tr><td></td><td class="popular3"></td><td class="amountPopular3"></td></tr>
+	<tr><td></td><td class="popular4"></td><td class="amountPopular4"></td></tr>
+	<tr><td></td><td class="popular5"></td><td class="amountPopular5"></td></tr>
+	<tr><td></td><td class="popular6"></td><td class="amountPopular6"></td></tr>
+	<tr><td></td><td class="popular7"></td><td class="amountPopular7"></td></tr>
+	<tr><td></td><td class="popular8"></td><td class="amountPopular8"></td></tr>
+	<tr><td></td><td class="popular9"></td><td class="amountPopular9"></td></tr>
+	<tr><td></td><td class="popular10"></td><td class="amountPopular10"></td></tr>
+</table>
 
 <script type="text/javascript">
 
@@ -33,18 +45,68 @@ function readFile (evt) {
     	});
 
    var textArray = inputValue.split(' ');
+
    function mostPopularWord(array) {
-   	var mPWord = {
-   		word: '',
-   		amount: 1
-   	}
-   	var mPWordAmount = 1;
+	   // for (var c = 0; c <= 9; c++) {
+	   	//var c = 0;
 
-	   for (var i = 0; i < array.length; i++) {
-		   var word = array[i];
-		   var wordAmount = 1;
+	   	var mPWord = 
+	   		{
+		   		word: '',
+		   		amount: 1
+		   	}
+		   	// ,
+
+		   	// {
+		   	// 	word: '',
+		   	// 	amount: 1
+		   	// },
+
+		   	// {
+		   	// 	word: '',
+		   	// 	amount: 1
+		   	// },
+
+		   	// {
+		   	// 	word: '',
+		   	// 	amount: 1
+		   	// },
+
+		   	// {
+		   	// 	word: '',
+		   	// 	amount: 1
+		   	// },
+
+		   	// {
+		   	// 	word: '',
+		   	// 	amount: 1
+		   	// },
+
+		   	// {
+		   	// 	word: '',
+		   	// 	amount: 1
+		   	// },
+
+		   	// {
+		   	// 	word: '',
+		   	// 	amount: 1
+		   	// },
+
+		   	// {
+		   	// 	word: '',
+		   	// 	amount: 1
+		   	// },
+
+		   	// {
+		   	// 	word: '',
+		   	// 	amount: 1
+		   	// }	
+	   	
+
+		   for (var i = 0; i < array.length; i++) {
+		   	var word = array[i];
+		   	var wordAmount = 1;
 		   
-
 		   for (var j = i + 1; j < array.length; j++) {
 		   	if (word == array[j]) {
 		   		wordAmount++;
@@ -54,13 +116,27 @@ function readFile (evt) {
 		   	}
 		   }
 	   }
+
+
+   	// 	for (var l = 0; l < array.length; l++) {
+				// var indx = array.indexOf(mPWord.word);
+				// array.splice(indx, 1);
+   	// 	}
+   	//}
 	   
 		return mPWord;
    }
 
-   document.getElementById('popular').innerHTML = mostPopularWord(textArray).word;
+
+
+	document.getElementById('popular').innerHTML = mostPopularWord(textArray).word;
    document.getElementById('amountPopular').innerHTML = mostPopularWord(textArray).amount;
    document.getElementById('amount').innerHTML = textArray.length;
+   
+
+   
+
+   
 
 
    	}
