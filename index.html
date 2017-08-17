@@ -44,79 +44,46 @@ function readFile (evt) {
     		});
     	});
 
-   var textArray = inputValue.split(' ');
+   var textArray = inputValue
+   			.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()'"]/g,"")
+   			.replace(/[\n]/g,' ')
+   			.split(' ').filter(function(elem) {
+			   	return !(elem === '' || elem === ' '); //elem !== " " && elem !== "";
+			   })
+			   .map(function(elem) {
+			  		return elem.toLowerCase();
+				});
+   
+	  
+	var object = {};
+console.log(textArray);
+   for (var i = 0; i < textArray.length; i++) {
+   	var word = textArray[i].toString();
+   	var wordAmount = 1;
 
-   function mostPopularWord(array) {
-	   // for (var c = 0; c <= 9; c++) {
-	   	//var c = 0;
+   	if (object[word]) {
+   		object[word]++;
+   	} else {
+   		object[word] = 1;
+   	}
 
-	   	var mPWord = 
-	   		{
-		   		word: '',
-		   		amount: 1
-		   	}
-		   	// ,
+   }
+   Object.keys(object).forEach(key=>{
+   	if(key.indexOf('"')!==-1) console.log(key);
+   });
+			   // for (var j = i + 1; j < textArray.length; j++) {
+			   // 	if (word == textArray[j]) {
+			   // 		wordAmount++;
+			   // 	} else if (wordAmount > mPWord.amount) {
+			   // 		mPWord.word = word;
+			   // 		mPWord.amount = wordAmount;
+			   // 	}
+			   // }
 
-		   	// {
-		   	// 	word: '',
-		   	// 	amount: 1
-		   	// },
-
-		   	// {
-		   	// 	word: '',
-		   	// 	amount: 1
-		   	// },
-
-		   	// {
-		   	// 	word: '',
-		   	// 	amount: 1
-		   	// },
-
-		   	// {
-		   	// 	word: '',
-		   	// 	amount: 1
-		   	// },
-
-		   	// {
-		   	// 	word: '',
-		   	// 	amount: 1
-		   	// },
-
-		   	// {
-		   	// 	word: '',
-		   	// 	amount: 1
-		   	// },
-
-		   	// {
-		   	// 	word: '',
-		   	// 	amount: 1
-		   	// },
-
-		   	// {
-		   	// 	word: '',
-		   	// 	amount: 1
-		   	// },
-
-		   	// {
-		   	// 	word: '',
-		   	// 	amount: 1
-		   	// }	
 	   	
 
-		   for (var i = 0; i < array.length; i++) {
-		   	var word = array[i];
-		   	var wordAmount = 1;
-		   
-		   for (var j = i + 1; j < array.length; j++) {
-		   	if (word == array[j]) {
-		   		wordAmount++;
-		   	} else if (wordAmount > mPWord.amount) {
-		   		mPWord.word = word;
-		   		mPWord.amount = wordAmount;
-		   	}
-		   }
-	   }
 
+	   	//console.log(object);
 
    	// 	for (var l = 0; l < array.length; l++) {
 				// var indx = array.indexOf(mPWord.word);
@@ -124,13 +91,11 @@ function readFile (evt) {
    	// 	}
    	//}
 	   
-		return mPWord;
-   }
+		
 
 
-
-	document.getElementById('popular').innerHTML = mostPopularWord(textArray).word;
-   document.getElementById('amountPopular').innerHTML = mostPopularWord(textArray).amount;
+	// document.getElementById('popular').innerHTML = mPWord.word;
+   // document.getElementById('amountPopular').innerHTML = mPWord.amount;
    document.getElementById('amount').innerHTML = textArray.length;
    
 
