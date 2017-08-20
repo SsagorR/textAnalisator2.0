@@ -6,23 +6,13 @@
 	<meta charset="utf-8">
 </head>
 <body>
+<span class="top">This site will help You to count words in text and find the most commonly used of them</span>
+<label for="topLength">What length should be the top of the most commonly used words in Your text?</label><input type="number" id="topLength"><br>
 <input type="file" id="file" class="hidden">
 <label for="file" class="input">select file</label><br>
 <div class="inline"><span class="results">Total amount of words:  </span><span class="results" id="amount"></span><br></div>
-<div class="inline"><span class="results">The most popular word:  </span><span class="results" id="popular"></span><br></div>
-<div class="inline"><span class="results">Total amount of the most popular word:  </span><span class="results" id="amountPopular"></span></div>
-<table>
-	<tr><td></td><td class="popular1"></td><td class="amountPopular1"></td></tr>
-	<tr><td></td><td class="popular2"></td><td class="amountPopular2"></td></tr>
-	<tr><td></td><td class="popular3"></td><td class="amountPopular3"></td></tr>
-	<tr><td></td><td class="popular4"></td><td class="amountPopular4"></td></tr>
-	<tr><td></td><td class="popular5"></td><td class="amountPopular5"></td></tr>
-	<tr><td></td><td class="popular6"></td><td class="amountPopular6"></td></tr>
-	<tr><td></td><td class="popular7"></td><td class="amountPopular7"></td></tr>
-	<tr><td></td><td class="popular8"></td><td class="amountPopular8"></td></tr>
-	<tr><td></td><td class="popular9"></td><td class="amountPopular9"></td></tr>
-	<tr><td></td><td class="popular10"></td><td class="amountPopular10"></td></tr>
-</table>
+<div class="inline"><span class="results">The most commonly used word:  </span><span class="results" id="popular"></span><br></div>
+<div class="inline"><span class="results">Total amount of the most commonly used word:  </span><span class="results" id="amountPopular"></span></div><br>
 
 <script type="text/javascript">
 
@@ -48,15 +38,18 @@ function readFile (evt) {
    			.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()'"]/g,"")
    			.replace(/[\n]/g,' ')
    			.split(' ').filter(function(elem) {
-			   	return !(elem === '' || elem === ' '); //elem !== " " && elem !== "";
+			   	return !(elem === '' || elem === ' ' || elem == "");
 			   })
 			   .map(function(elem) {
 			  		return elem.toLowerCase();
 				});
-   
-	  
+   for (var i = 0; i < textArray.length; i++){
+      if (textArray[i] == "" || textArray[i] == " " || textArray[i] == "  " || textArray[i] == "   " || textArray[i] == "    " || textArray[i] == "     " ) {
+         delete textArray[i];
+      } 
+   }
 	var object = {};
-console.log(textArray);
+
    for (var i = 0; i < textArray.length; i++) {
    	var word = textArray[i].toString();
    	var wordAmount = 1;
@@ -68,42 +61,34 @@ console.log(textArray);
    	}
 
    }
-   Object.keys(object).forEach(key=>{
-   	if(key.indexOf('"')!==-1) console.log(key);
-   });
-			   // for (var j = i + 1; j < textArray.length; j++) {
-			   // 	if (word == textArray[j]) {
-			   // 		wordAmount++;
-			   // 	} else if (wordAmount > mPWord.amount) {
-			   // 		mPWord.word = word;
-			   // 		mPWord.amount = wordAmount;
-			   // 	}
-			   // }
+   
+   console.log(object);
+   var array1 = [];
 
-	   	
+   Object.keys(object).forEach(key=>{array1.push({word: key, amount: object[key]});});
 
+   function compareAmount(wordA, wordB) {
+      return wordA.amount - wordB.amount;
+   }
 
-	   	//console.log(object);
+   array1.sort(compareAmount).reverse();
 
-   	// 	for (var l = 0; l < array.length; l++) {
-				// var indx = array.indexOf(mPWord.word);
-				// array.splice(indx, 1);
-   	// 	}
-   	//}
-	   
-		
+   var tableObj = document.createElement('table');
+   var tableHTML = '<tr><td>Position</td><td>Word</td><td>Amount</td></tr>';
+   var length = document.getElementById('topLength').value;
 
 
-	// document.getElementById('popular').innerHTML = mPWord.word;
-   // document.getElementById('amountPopular').innerHTML = mPWord.amount;
+   for (var i = 1; i <= length; i++){
+      tableHTML += '<tr><td>' + i + '</td><td>' + array1[i-1].word + '</td><td>' + array1[i-1].amount +'</td></tr>';
+   }
+
+   tableObj.innerHTML = tableHTML;
+   document.body.appendChild(tableObj);
+
+	document.getElementById('popular').innerHTML = array1[0].word;
+   document.getElementById('amountPopular').innerHTML = array1[0].amount;
    document.getElementById('amount').innerHTML = textArray.length;
    
-
-   
-
-   
-
-
    	}
        reader.readAsText(file);
       

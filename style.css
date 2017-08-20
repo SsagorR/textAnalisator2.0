@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	font-family: "Lucida Sans Unicode", sans-serif;
 }
 
 body {
@@ -7,6 +8,15 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
+
+.top {
+	background-color: #add8e6;
+	border: 3px solid #76bdd5;
+	border-radius: 10px;
+	text-align: center;
+	width: 30em;
+	margin-bottom: 2em
 }
 
 .hidden {
@@ -21,7 +31,6 @@ body {
 	border-radius: 10px;
 	text-align: center;
 	line-height: 2em;
-	font-family: Verdana, sans-serif;
 }
 
 .input:hover {
@@ -30,10 +39,6 @@ body {
 
 .inline {
 	display: inline;
-}
-
-.results {
-	font-family: "Lucida Sans Unicode", sans-serif;
 }
 
 table, td, tr {
